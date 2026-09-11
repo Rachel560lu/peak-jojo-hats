@@ -1,3 +1,15 @@
+# 0.5.0
+
+- Add six JOJO hats alongside the existing cosmetic catalog instead of replacing it; keep other custom hats, eyes, faces and accessories.
+- Use unmodified More Customizations 1.1.10 with its included sample bundle. Normal installs no longer require PowerShell or third-party DLL patches.
+- Remove the historical JOJO-only installer and empty-bundle patch scripts from the download package. Existing profile files and backups are not changed automatically.
+- Add mod-manager installation, v0.4.2 migration, removal and matching-profile multiplayer instructions in English and Chinese.
+- Include the six-image in-game gallery directly in the Thunderstore description, with bilingual captions and full-size image links.
+- Keep the six models, textures and cosmetic IDs from v0.4.2. Asset revision numbers remain independent of the loader version.
+- Multiplayer appearance and reconnect behavior still require two-client validation; no automatic asset synchronization is provided.
+
+中文：现在只添加六款头饰，不隐藏其他自定义外观；正常安装不再需要脚本或修改框架。模型不变。旧版修改过依赖的配置建议重新建立，联机请使用相同的完整外观配置。
+
 # 0.4.2
 
 - Extend continuous-volume / fitted-root refinement to Jotaro, Jonathan and Joseph.

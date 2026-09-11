@@ -1,8 +1,8 @@
 {
   "name": "JojoScoutHats",
-  "version_number": "0.4.2",
+  "version_number": "0.5.0",
   "website_url": "https://github.com/Rachel560lu/peak-jojo-hats",
-  "description": "Six low-poly JOJO-inspired head cosmetics: cap, pompadour, rolls, blue hair, buns and brown hair.",
+  "description": "JOJO-inspired hats and hairstyles for PEAK: Jotaro, Jolyne, Giorno, Josuke, Joseph and Jonathan.",
   "dependencies": [
     "BepInEx-BepInExPack_PEAK-5.4.75301",
     "cretapark-More_Customizations-1.1.10"

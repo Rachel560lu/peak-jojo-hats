@@ -15,14 +15,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest"><img src="https://img.shields.io/badge/Download-GitHub_Releases-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on GitHub Releases / 在 GitHub 下载"></a>
-  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/tag/v0.4.2"><img src="https://img.shields.io/badge/Version-v0.4.2-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.4.2"></a>
+  <a href="https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/"><img src="https://img.shields.io/badge/Download-Thunderstore-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on Thunderstore / 在 Thunderstore 下载"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.0-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.0"></a>
   <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/BepInEx-5-405c68?style=for-the-badge&amp;labelColor=555555" alt="Requires BepInEx 5"></a>
   <img src="https://img.shields.io/badge/Hats-6-7560a8?style=for-the-badge&amp;labelColor=555555" alt="Six head cosmetics / 六款头饰">
 </p>
 
 <p align="center">
-  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest">Download / 下载</a> ·
+  <a href="https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/">Download / 下载</a> ·
   <a href="README.zh-CN.md">简体中文</a> ·
   <a href="README.md">English</a> ·
   <a href="docs/INSTALL.md">Install / 安装</a> ·
@@ -55,31 +55,32 @@ Here's how they look in-game. Click a photo for a closer look.
 ## What's included
 
 - Six selectable hats: Jotaro Cap, Josuke Pompadour, Giorno Rolls, Jonathan Hair, Jolyne Buns and Joseph Hair.
+- Adds to your existing cosmetics: keep your other custom hats, eyes, faces and accessories.
 - Rounded shapes and simple colors to suit PEAK's little scouts.
 - Pick your favorite in the passport's Hat tab, with BepInEx and More Customizations installed.
 - Want to tinker? Model files are included. You don't need Blender or Unity Editor just to play.
 
 ## Install
 
-1. Create a **dedicated PEAK profile** in r2modman or Thunderstore Mod Manager.
-2. Install `BepInEx-BepInExPack_PEAK-5.4.75301` and `cretapark-More_Customizations-1.1.10` (the tested dependency versions).
-3. Download [JojoScoutHats-0.4.2.zip](https://github.com/Rachel560lu/peak-jojo-hats/releases/download/v0.4.2/JojoScoutHats-0.4.2.zip). Import it as a local mod, or copy its `BepInEx/plugins/JojoHats` folder into your profile's `BepInEx/plugins` folder.
-4. For the JOJO-only, zero-`.pcab` setup, close PEAK and run the included compatibility installer as explained in [the installation guide](docs/INSTALL.md). It backs up and patches the **local** More Customizations DLL and moves its sample bundle out of the loading path.
-5. Launch modded PEAK, open the passport's Hat tab, and page to the six JOJO icons.
+1. Open [JojoScoutHats on Thunderstore](https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/) and install **v0.5.0 or newer** with r2modman or Thunderstore Mod Manager. Accept the dependency installation.
+2. Start **modded PEAK** from the manager.
+3. Open the passport's **Hat** tab and choose a JOJO icon.
 
-**Please run the compatibility step before removing `built-in.pcab`.** Without the patch, More Customizations 1.1.10 reports an error when no bundles are present.
+No PowerShell, file deletion or framework patch is needed. Leave More Customizations and its included `built-in.pcab` as installed. Dependencies: BepInExPack_PEAK **5.4.75301** and More Customizations **1.1.10**. See [the installation guide](docs/INSTALL.md) for manual installation and troubleshooting.
+
+**Coming from v0.4.2?** Equip a vanilla hat before upgrading, then reselect your JOJO hat afterward: the old exclusive catalog and the new shared catalog can use different positions. If you previously ran the JOJO-only patch or removed the framework's sample bundle, a **fresh mod-manager profile** is the simplest way to start clean. Updating this mod does not restore or modify third-party files.
 
 ### Compatibility notes
 
-- This version intentionally replaces the **custom** cosmetic catalog with these six hats. Other custom hats, eyes and accessories are excluded; **vanilla cosmetics remain available**. Keep it in a dedicated profile.
-- Everyone in a lobby should use matching cosmetic packs and versions. This mod does not transfer mesh files between players; two-client multiplayer validation is still pending.
+- v0.5.0 appends six hats; it does not replace other custom categories, delete bundles or patch dependency DLLs. Vanilla cosmetics remain available too.
+- For multiplayer, share the **same complete cosmetic profile**, including dependencies, all other cosmetic packs and their versions. Installing only the same JOJO version is not enough. Models are not transferred between players; two-client appearance and reconnect validation are still pending.
 - Switch to a vanilla hat before uninstalling or launching an unmodded profile.
-- Framework updates can restore the sample bundle or change compatibility. Only More Customizations 1.1.10 has been tested with the included patch.
+- The supported framework target is unmodified More Customizations 1.1.10. Other framework or game versions may need a compatibility update; see [validation scope](docs/VALIDATION.md).
 - These are static hats. Clipping with every outfit, first-person camera and climbing/ragdoll pose has not been exhaustively tested.
 
 ## Source and development
 
-Current release: **0.4.2**. The repository includes the C# loader, procedural model sources, exported JSON/OBJ meshes, shared palette and the six original-size showcase images.
+Current version: **0.5.0**. The six models are unchanged from v0.4.2; this update focuses on installation and coexistence with other cosmetics. The repository includes the C# loader, procedural model sources, exported JSON/OBJ meshes, shared palette and the six original-size showcase images.
 
 See [Build and model development](docs/BUILD.md), [validation scope](docs/VALIDATION.md) and [changelog](CHANGELOG.md). Game assemblies and third-party mod DLLs are **not** distributed here; a local PEAK installation is needed to compile the loader.
 

@@ -41,8 +41,8 @@ Release debug symbols are disabled to avoid embedding a private local PDB path
 in the distributed DLL.
 Build intermediates and CLI state remain in the repository's ignored `bin`,
 `obj` and `.dotnet-home` directories. Keep the compiled DLL beside its `assets`
-directory when installing; see the main README for the separate installation
-and zero-PCAB compatibility steps.
+directory when installing; see the main README for normal mod-manager
+installation. v0.5.0 keeps the original framework and its `built-in.pcab`.
 
 ## Models and validation
 
@@ -87,8 +87,44 @@ After building Release and validating the assets:
 python tools/package.py
 ```
 
-This creates `dist/JojoScoutHats-0.4.2.zip` from an explicit runtime allowlist:
+This creates `dist/JojoScoutHats-0.5.0.zip` from an explicit runtime allowlist:
 the project's DLL, six meshes/icons, shared palette/catalog, metadata and the
-compatibility scripts. It does not include game/framework DLLs, OBJ sources,
+approved 256 x 256 icon. It does not include compatibility scripts, test plugins,
+game/framework DLLs, OBJ sources,
 screenshots, development logs or local paths. The archive README uses absolute
 repository links so documentation works outside a source checkout.
+
+## Registration regression tests
+
+These do not require the game or dependency assemblies:
+
+```powershell
+dotnet run --project tests/CatalogMerge.Tests/CatalogMerge.Tests.csproj --configuration Release
+```
+
+The test project links the actual `src/CatalogMerge.cs` implementation. GitHub
+Actions runs it together with asset validation; it does not launch PEAK.
+
+For an opt-in, no-graphics check against a local Windows PEAK installation:
+
+```powershell
+.\scripts\test-release.ps1 -PackageZip '.\dist\JojoScoutHats-0.5.0.zip' -GameDir 'YOUR_PEAK_DIRECTORY' -Scenario clean
+.\scripts\test-release.ps1 -PackageZip '.\dist\JojoScoutHats-0.5.0.zip' -GameDir 'YOUR_PEAK_DIRECTORY' -Scenario mixed
+```
+
+Close PEAK first. The scripts download the exact official dependencies, create
+new ignored `test-profile` directories, and launch the game twice with a
+profile-specific Doorstop preloader. The game must already have a working
+BepInEx/Doorstop bootstrap; the scripts do not modify the game installation.
+The mixed scenario includes Umamusume Hats 0.1.1. Failed or timed-out runs stop
+validation; a timed-out game process is left for inspection, not forcibly killed.
+
+For upgrade/uninstall and missing-asset tests, build the separate
+[RuntimeProbe](../tests/RuntimeProbe/README.md), then run `scripts/test-lifecycle.ps1`
+with a generated `-PreparedProfile`, local `-GameDir`, new `-ReleaseDll` and an
+original v0.4.2 package `-LegacyZip`. This creates another isolated profile and
+moves only test-local JOJO files. Never put the probe in a player release.
+
+These checks exercise registration against real game/framework code, not mod
+manager UI, saved selection or two-client multiplayer. See
+[validation scope](VALIDATION.md) for observed results and remaining checks.

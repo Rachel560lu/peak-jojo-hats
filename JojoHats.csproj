@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AssemblyName>JojoHats</AssemblyName>
-    <Version>0.4.2</Version>
+    <Version>0.5.0</Version>
     <!-- Public release DLLs must not embed the author's absolute PDB path. -->
     <DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
   </PropertyGroup>

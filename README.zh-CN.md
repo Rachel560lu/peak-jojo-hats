@@ -15,14 +15,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest"><img src="https://img.shields.io/badge/Download-GitHub_Releases-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on GitHub Releases / 在 GitHub 下载"></a>
-  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/tag/v0.4.2"><img src="https://img.shields.io/badge/Version-v0.4.2-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.4.2"></a>
+  <a href="https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/"><img src="https://img.shields.io/badge/Download-Thunderstore-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on Thunderstore / 在 Thunderstore 下载"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.0-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.0"></a>
   <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/BepInEx-5-405c68?style=for-the-badge&amp;labelColor=555555" alt="Requires BepInEx 5"></a>
   <img src="https://img.shields.io/badge/Hats-6-7560a8?style=for-the-badge&amp;labelColor=555555" alt="Six head cosmetics / 六款头饰">
 </p>
 
 <p align="center">
-  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest">Download / 下载</a> ·
+  <a href="https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/">Download / 下载</a> ·
   <a href="README.zh-CN.md">简体中文</a> ·
   <a href="README.md">English</a> ·
   <a href="docs/INSTALL.md">Install / 安装</a> ·
@@ -55,31 +55,32 @@
 ## 包含内容
 
 - 六款头饰：承太郎帽、仗助牛排头、乔鲁诺三卷、乔纳森蓝发、徐伦双丸子、乔瑟夫棕发。
+- 只添加头饰，不隐藏你已有的其他自定义帽子、眼睛、表情和配件。
 - 圆圆的造型、简单的配色，尽量贴近 PEAK 小人的画风。
 - 装好 BepInEx 和 More Customizations 后，在护照的帽子页选择喜欢的款式。
 - 想自己改模型的话，仓库里也有模型文件。只是游玩不需要安装 Blender 或 Unity Editor。
 
 ## 安装
 
-1. 在 r2modman 或 Thunderstore Mod Manager 中建立一个 **PEAK 专用配置**。
-2. 安装测试过的依赖：`BepInEx-BepInExPack_PEAK-5.4.75301`、`cretapark-More_Customizations-1.1.10`。
-3. 下载 [JojoScoutHats-0.4.2.zip](https://github.com/Rachel560lu/peak-jojo-hats/releases/download/v0.4.2/JojoScoutHats-0.4.2.zip)，作为本地模组导入；也可以把压缩包内的 `BepInEx/plugins/JojoHats` 文件夹复制到对应配置的 `BepInEx/plugins` 中。
-4. 使用只有 JOJO、没有 `.pcab` 的配置时，先关闭游戏，按[详细安装说明](docs/INSTALL.md)运行随包附带的兼容脚本。它会备份并修改**本地** More Customizations DLL，再将自带样例包移出加载目录。
-5. 从模组管理器启动游戏，进入护照的帽子页，翻到六款 JOJO 图标。
+1. 打开 [Thunderstore 上的 JojoScoutHats](https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/)，用 r2modman 或 Thunderstore Mod Manager 安装 **v0.5.0 或更新版本**，一并安装提示的依赖。
+2. 从管理器启动 **Modded PEAK / 模组版游戏**。
+3. 打开护照的 **Hat / 帽子** 页，选择喜欢的 JOJO 图标。
 
-**移除 `built-in.pcab` 前，记得先运行兼容脚本。** 如果只删文件，More Customizations 1.1.10 会因为找不到资源包而报错。
+不需要运行 PowerShell、删除文件或修改框架。保留 More Customizations 及其自带的 `built-in.pcab` 即可。依赖为 BepInExPack_PEAK **5.4.75301** 和 More Customizations **1.1.10**。手动安装与常见问题见[详细安装说明](docs/INSTALL.md)。
+
+**从 v0.4.2 升级？** 请先换回原版帽子，升级后重新选择 JOJO 头饰：旧版独占列表与新版共存列表中的位置可能不同。如果以前运行过 JOJO-only 补丁或删除过样例包，最省心的方式是**新建一个管理器配置**。更新本模组不会自动恢复或修改其他模组的文件。
 
 ## 兼容性与注意事项
 
-- 建议给它单独建一个配置：这一版只会显示六款 JOJO 自定义头饰，其他自定义帽子、眼睛和配件会被隐藏，**原版外观不受影响**。不要直接装进混有其他外观包的常用配置。
-- 联机玩家应安装一致的外观包和版本。本模组不会在玩家间传输模型文件，尚未完成双客户端联机验证。
+- v0.5.0 只追加六款头饰，不替换其他自定义分类，不删除资源包，也不修改依赖 DLL；原版外观同样保留。
+- 联机时请分享并使用**相同的完整外观配置**：依赖、其他外观包及其版本也要一致，不能只保证 JOJO 版本相同。本模组不会自动传输模型；双客户端外观与重连验证仍待完成。
 - 卸载或切换回原版配置前，先换回一顶原版帽子。
-- 依赖更新可能恢复样例包或改变兼容性。随包修复只在 More Customizations 1.1.10 上测试过。
+- 适配目标是未修改的 More Customizations 1.1.10。其他框架或游戏版本可能需要兼容更新，具体见[验证范围](docs/VALIDATION.md)。
 - 头饰都是静态的。目前还没检查完所有衣服、第一人称视角和攀爬／摔倒姿势，可能会有穿模；遇到问题欢迎带截图反馈。
 
 ## 开发与源码
 
-当前版本：**0.4.2**。仓库包含 C# 加载器、程序化建模源码、JSON／OBJ 模型、共享色板以及六张原尺寸展示图。
+当前版本：**0.5.0**。六款模型沿用 v0.4.2，本次主要改进安装体验和与其他外观的共存。仓库包含 C# 加载器、程序化建模源码、JSON／OBJ 模型、共享色板以及六张原尺寸展示图。
 
 参阅[构建与模型开发](docs/BUILD.md)、[验证范围](docs/VALIDATION.md)和[更新记录](CHANGELOG.md)。仓库不分发游戏程序集或其他模组 DLL；编译加载器需要你本地合法安装的 PEAK。
 

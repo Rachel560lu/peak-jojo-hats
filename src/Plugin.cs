@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 using BepInEx;
 using MoreCustomizations;
 using MoreCustomizations.Data;
@@ -12,10 +14,11 @@ using Object = UnityEngine.Object;
 
 namespace JojoHats;
 
-[BepInPlugin("midor.peak.jojohats", "JOJO Scout Hats", "0.4.2")]
+[BepInPlugin("midor.peak.jojohats", "JOJO Scout Hats", Version)]
 [BepInDependency("MoreCustomizations", "1.1.10")]
 public sealed class Plugin : BaseUnityPlugin
 {
+    internal const string Version = "0.5.0";
     private const string Prefix = "jojo_mvp_";
     private static readonly string[] Ids = {
         "01_jotaro_cap", "02_josuke_pompadour", "03_giorno_rolls",
@@ -24,6 +27,9 @@ public sealed class Plugin : BaseUnityPlugin
     private readonly List<Object> ownedAssets = new();
     private readonly List<CustomHat_V1> hats = new();
     private GameObject? templates;
+    private IReadOnlyDictionary<Customization.Type, IReadOnlyList<CustomizationData>>? originalCatalog;
+    private string contentFingerprint = "";
+    private bool catalogPublished;
 
     private void Awake()
     {
@@ -31,7 +37,8 @@ public sealed class Plugin : BaseUnityPlugin
         {
             string root = Path.Combine(Path.GetDirectoryName(Info.Location)!, "assets");
             var previous = MoreCustomizationsPlugin.AllCustomizationsData
-                ?? throw new InvalidOperationException("More Customizations did not initialize. See docs/INSTALL.md and the release's scripts/install-jojo-only.ps1 for the empty-bundle compatibility step.");
+                ?? throw new InvalidOperationException("More Customizations did not initialize. Reinstall the official More Customizations dependency in your mod-manager profile and keep its built-in.pcab. Do not run the old JOJO-only patch script. No other cosmetics or files were changed.");
+            originalCatalog = previous;
             // Prepare everything before touching the shared catalog: a missing model never
             // results in different subsets/indices silently loading on different clients.
             Texture2D atlas = LoadTexture(Path.Combine(root, "palette.png"));
@@ -58,6 +65,7 @@ public sealed class Plugin : BaseUnityPlugin
                 // activeSelf stays true; only the template container is inactive.
                 // Framework clones these into the head slot and controls their visibility.
                 var hat = ScriptableObject.CreateInstance<CustomHat_V1>();
+                ownedAssets.Add(hat);
                 hat.name = Prefix + id;
                 Set(hat, nameof(CustomHat_V1.Icon), LoadTexture(Path.Combine(folder, "icon.png")));
                 Set(hat, nameof(CustomHat_V1.Prefab), prefab);
@@ -66,42 +74,63 @@ public sealed class Plugin : BaseUnityPlugin
                 Set(hat, nameof(CustomHat_V1.PositionOffset), Vector3.zero);
                 Set(hat, nameof(CustomHat_V1.EulerAngleOffset), Vector3.zero);
                 if (!hat.IsValid) throw new InvalidDataException("Hat validation failed: " + id);
-                ownedAssets.Add(hat);
                 hats.Add(hat);
                 Logger.LogInfo($"Prepared {id}: {mesh.vertexCount} vertices, {data.triangles.Length / 3} triangles");
             }
-            // This is deliberately a JOJO-only custom profile. Vanilla catalogs remain intact.
-            var next = new Dictionary<Customization.Type, IReadOnlyList<CustomizationData>>();
-            var allHats = new List<CustomizationData>();
-            allHats.AddRange(hats);
-            next[Customization.Type.Hat] = allHats.AsReadOnly();
+            // Preserve every existing entry/index. Only append our stable, namespaced IDs.
+            // No category clearing, global sorting, save rewriting or dependency file changes.
+            var next = CatalogMerge.Append(previous, Customization.Type.Hat,
+                hats.Cast<CustomizationData>().ToArray(), item => item.name);
+            contentFingerprint = Fingerprint(root);
             // 1.1.10 has no public RegisterHat API. Isolate the private setter bridge here.
-            // Exclude all framework examples/other custom packs; do not alter vanilla entries.
             SetStatic(typeof(MoreCustomizationsPlugin), "AllCustomizationsData", next);
-            Logger.LogInfo("JOJO_REGISTERED=6; catalog order fixed; ready for passport and character creation.");
+            catalogPublished = true;
+            int existingHats = previous.TryGetValue(Customization.Type.Hat, out var entries) ? entries.Count : 0;
+            Logger.LogInfo($"JOJO_REGISTERED=6; mode=append; existingHats={existingHats}; totalHats={next[Customization.Type.Hat].Count}; contentSHA256={contentFingerprint}");
+            Logger.LogInfo("Other cosmetics preserved. For multiplayer, every player needs the same complete cosmetic profile and versions; mesh files are not sent over the network.");
             if (Environment.GetCommandLineArgs().Contains("--jojo-smoke-test"))
             {
-                File.WriteAllLines(Path.Combine(Paths.BepInExRootPath, "jojo-smoke.txt"), new[] { "version=0.4.2", "result=PENDING" });
+                File.WriteAllLines(Path.Combine(Paths.BepInExRootPath, "jojo-smoke.txt"), new[] { "version=" + Version, "result=PENDING" });
                 StartCoroutine(SmokeTest());
             }
         }
         catch (Exception e)
         {
-            Logger.LogError("JOJO initialization aborted before registration: " + e);
-            if (templates) Object.Destroy(templates);
-            foreach (Object asset in ownedAssets) if (asset) Object.Destroy(asset);
-            enabled = false;
+            Logger.LogError((catalogPublished ? "JOJO post-registration diagnostic failed: " : "JOJO initialization aborted; other cosmetics left unchanged: ") + e);
+            // Once published, other objects may reference our assets; never destroy them here.
+            if (!catalogPublished)
+            {
+                if (templates) Object.Destroy(templates);
+                foreach (Object asset in ownedAssets) if (asset) Object.Destroy(asset);
+                enabled = false;
+            }
+            if (Environment.GetCommandLineArgs().Contains("--jojo-smoke-test"))
+            {
+                File.WriteAllLines(Path.Combine(Paths.BepInExRootPath, "jojo-smoke.txt"), new[] { "version=" + Version, "result=FAIL: " + e });
+                if (Environment.GetCommandLineArgs().Contains("--jojo-test-quit")) Application.Quit();
+            }
         }
+    }
+
+    private static string Fingerprint(string root)
+    {
+        // Hash only our shipped content, never player data, absolute paths or other mods.
+        using var hash = SHA256.Create();
+        var records = new List<string>();
+        foreach (string relative in new[] { "palette.png" }.Concat(Ids.SelectMany(id =>
+                     new[] { id + "/mesh.json", id + "/icon.png" })))
+            records.Add(relative + ":" + BitConverter.ToString(hash.ComputeHash(File.ReadAllBytes(Path.Combine(root, relative)))).Replace("-", ""));
+        return BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(string.Join("\n", records)))).Replace("-", "").ToLowerInvariant();
     }
 
     private Texture2D LoadTexture(string path)
     {
         var texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+        ownedAssets.Add(texture);
         if (!ImageConversion.LoadImage(texture, File.ReadAllBytes(path)))
             throw new InvalidDataException("Cannot decode " + path);
         texture.name = Path.GetFileName(path);
         texture.wrapMode = TextureWrapMode.Clamp;
-        ownedAssets.Add(texture);
         return texture;
     }
 
@@ -117,7 +146,11 @@ public sealed class Plugin : BaseUnityPlugin
             uv[i] = new Vector2(data.uv[i*2], data.uv[i*2+1]);
             colors[i] = Color.white;
         }
-        var mesh = new Mesh { name = Prefix + data.name, vertices = vertices, uv = uv, colors = colors };
+        var mesh = new Mesh { name = Prefix + data.name };
+        ownedAssets.Add(mesh);
+        mesh.vertices = vertices;
+        mesh.uv = uv;
+        mesh.colors = colors;
         // Framework assigns exactly two materials. Keep a matching empty secondary submesh.
         mesh.subMeshCount = 2;
         mesh.SetTriangles(data.triangles, 0);
@@ -130,7 +163,6 @@ public sealed class Plugin : BaseUnityPlugin
         }
         else mesh.RecalculateNormals(); // Compatibility with legacy assets.
         mesh.RecalculateBounds();
-        ownedAssets.Add(mesh);
         return mesh;
     }
 
@@ -176,7 +208,7 @@ public sealed class Plugin : BaseUnityPlugin
     {
         // Explicit test launch only. Verify in the real Unity process, without touching save selections.
         yield return new WaitForSecondsRealtime(18);
-        var results = new List<string> { "version=0.4.2", "registered=" + hats.Count };
+        var results = new List<string> { "version=" + Version, "registered=" + hats.Count, "contentSHA256=" + contentFingerprint };
         var catalog = MoreCustomizationsPlugin.AllCustomizationsData;
         int other = catalog.Where(p => p.Key != Customization.Type.Hat).Sum(p => p.Value.Count);
         results.Add("customNonHatEntries=" + other);
@@ -200,10 +232,12 @@ public sealed class Plugin : BaseUnityPlugin
         results.Add("characterShader=" + (shader != null));
         results.Add("runtime=" + Application.unityVersion);
             if (!shader) throw new InvalidOperationException("Game character shader missing.");
-            if (other != 0 || catalog[Customization.Type.Hat].Count != 6)
-                throw new InvalidOperationException("JOJO-only catalog invariant failed.");
-            if (Directory.GetFiles(Paths.PluginPath, "*.pcab", SearchOption.AllDirectories).Length != 0)
-                throw new InvalidOperationException("Isolated profile still contains a pcab bundle.");
+            VerifyPreservedCatalog(catalog);
+            var twice = CatalogMerge.Append(catalog, Customization.Type.Hat,
+                hats.Cast<CustomizationData>().ToArray(), item => item.name);
+            if (twice[Customization.Type.Hat].Count != catalog[Customization.Type.Hat].Count)
+                throw new InvalidOperationException("Duplicate registration changed the catalog.");
+            results.Add("existingCatalogPreserved=PASS; duplicateRegistration=PASS");
             IntegrationSmoke(results);
             results.Add("result=PASS");
         }
@@ -217,21 +251,54 @@ public sealed class Plugin : BaseUnityPlugin
         if (Environment.GetCommandLineArgs().Contains("--jojo-test-quit")) Application.Quit();
     }
 
+    private void VerifyPreservedCatalog(IReadOnlyDictionary<Customization.Type, IReadOnlyList<CustomizationData>> actual)
+    {
+        if (originalCatalog == null) throw new InvalidOperationException("Missing pre-registration snapshot.");
+        foreach (var category in originalCatalog)
+        {
+            if (!actual.TryGetValue(category.Key, out var entries) || entries.Count < category.Value.Count)
+                throw new InvalidOperationException("Existing category removed or shortened: " + category.Key);
+            for (int i = 0; i < category.Value.Count; i++)
+                if (!ReferenceEquals(entries[i], category.Value[i]))
+                    throw new InvalidOperationException("Existing cosmetic changed index: " + category.Key + "/" + i);
+            if (category.Key != Customization.Type.Hat && entries.Count != category.Value.Count)
+                throw new InvalidOperationException("Unrelated cosmetic category changed.");
+        }
+        foreach (string id in Ids)
+            if (actual[Customization.Type.Hat].Count(item => item.name == Prefix + id) != 1)
+                throw new InvalidOperationException("Missing or duplicate JOJO hat: " + id);
+    }
+
     private void IntegrationSmoke(List<string> results)
     {
         GameObject source = Resources.Load<GameObject>("Character");
         if (!source) throw new InvalidOperationException("Game Character prefab not found.");
+        Type patch = typeof(MoreCustomizationsPlugin).Assembly.GetType("MoreCustomizations.Patches.CharacterCustomizationPatch", true);
+        Type passportPatch = typeof(MoreCustomizationsPlugin).Assembly.GetType("MoreCustomizations.Patches.PassportManagerPatch", true);
+        FieldInfo shaderCache = patch.GetField("_characterShader", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new MissingFieldException(patch.FullName, "_characterShader");
+        FieldInfo materialCache = passportPatch.GetField("materialTemplate", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new MissingFieldException(passportPatch.FullName, "materialTemplate");
+        object? savedShader = shaderCache.GetValue(null);
+        object? savedMaterialTemplate = materialCache.GetValue(null);
+        var originalMaterials = new HashSet<int>(Resources.FindObjectsOfTypeAll<Material>().Select(material => material.GetInstanceID()));
+        HashSet<int>? optionsBeforePassport = null;
         // Clone inactive: do not run gameplay/network Awake, create a player, or alter saves.
         GameObject test = Object.Instantiate(source, templates!.transform, false);
+        GameObject? passportTest = null;
+        int savedBaseHatCount = MoreCustomizationsPlugin.BaseHatCount;
+        int savedOverrideHatCount = MoreCustomizationsPlugin.OverrideHatCount;
+        try
+        {
         test.name = "JOJO isolated prefab integration";
         var cc = test.GetComponent<CharacterCustomization>();
         if (!cc || !cc.refs) throw new InvalidOperationException("CharacterCustomization refs missing.");
         int original = cc.refs.playerHats.Length;
-        Type patch = typeof(MoreCustomizationsPlugin).Assembly.GetType("MoreCustomizations.Patches.CharacterCustomizationPatch", true);
         patch.GetMethod("Awake", BindingFlags.Static | BindingFlags.NonPublic)!.Invoke(null, new object[] { cc });
         Renderer[] ours = cc.refs.playerHats.Where(r => r && r.name.StartsWith(Prefix, StringComparison.Ordinal)).ToArray();
         if (ours.Length != 6) throw new InvalidOperationException("Not all six hats attached to actual Character prefab.");
-        if (cc.refs.playerHats.Length != original + 6) throw new InvalidOperationException("Unexpected extra hat renderer.");
+        int customHats = MoreCustomizationsPlugin.AllCustomizationsData[Customization.Type.Hat].Count;
+        if (cc.refs.playerHats.Length < original + customHats) throw new InvalidOperationException("Existing custom hat renderers missing.");
         results.Add($"actualCharacterPrefab: baseRenderers={original}; jojoRenderers={ours.Length}");
         foreach (Renderer renderer in ours)
         {
@@ -247,27 +314,73 @@ public sealed class Plugin : BaseUnityPlugin
         results.Add("bodyTransform=" + cc.refs.mainRenderer.transform.position + "; scale=" + cc.refs.mainRenderer.transform.lossyScale);
         foreach (Renderer baseHat in cc.refs.playerHats.Take(8))
             if (baseHat) results.Add("baseHat=" + baseHat.name + "; local=" + baseHat.transform.localPosition + "; world=" + baseHat.transform.position);
+        if (Environment.GetCommandLineArgs().Contains("--jojo-network-index-test"))
+            NetworkIndexSmoke.Verify(results, Array.FindIndex(cc.refs.playerHats,
+                renderer => renderer && renderer.name == Prefix + Ids[0]));
+        else
+            results.Add("localGameSerializationRoundTrip=NOT_RUN; requires real initialized passport; twoClientMultiplayer=NOT_TESTED");
         // Exercise the framework's passport registration against an isolated empty catalog.
         // This checks icon/type/name registration, not interactive passport UI navigation.
-        GameObject passportTest = new GameObject("JOJO isolated passport registration");
+        passportTest = new GameObject("JOJO isolated passport registration");
         passportTest.transform.SetParent(templates.transform, false);
         object customization = passportTest.AddComponent(typeof(Customization));
         foreach (FieldInfo field in typeof(Customization).GetFields(BindingFlags.Public | BindingFlags.Instance))
             if (field.FieldType == typeof(CustomizationOption[])) field.SetValue(customization, Array.Empty<CustomizationOption>());
         object passport = passportTest.AddComponent(typeof(PassportManager));
-        Type passportPatch = typeof(MoreCustomizationsPlugin).Assembly.GetType("MoreCustomizations.Patches.PassportManagerPatch", true);
+        // In 1.1.10 this synchronous patch allocates fresh options and fit materials.
+        // Snapshot just before invoking it, so even an exception before its final array
+        // assignments can be cleaned up without destroying any pre-existing options.
+        optionsBeforePassport = new HashSet<int>(Resources.FindObjectsOfTypeAll<CustomizationOption>().Select(option => option.GetInstanceID()));
         passportPatch.GetMethod("Awake", BindingFlags.NonPublic | BindingFlags.Static)!.Invoke(null, new[] { passport });
         var options = (CustomizationOption[])typeof(Customization).GetField("hats")!.GetValue(customization);
         var oursOptions = options.Where(o => o.name.StartsWith(Prefix, StringComparison.Ordinal)).ToArray();
-        if (options.Length != 6) throw new InvalidOperationException("Unexpected non-JOJO custom passport hats.");
-        foreach (FieldInfo field in typeof(Customization).GetFields(BindingFlags.Public | BindingFlags.Instance))
-            if (field.FieldType == typeof(CustomizationOption[]) && field.Name != "hats" && ((CustomizationOption[])field.GetValue(customization)).Length != 0)
-                throw new InvalidOperationException("Unexpected custom cosmetics in " + field.Name);
+        if (options.Length < customHats) throw new InvalidOperationException("Existing custom passport hats missing.");
         if (oursOptions.Length != 6 || oursOptions.Where((o,i) => o.name != hats[i].name || o.texture != hats[i].IconTexture).Any())
             throw new InvalidOperationException("Passport names/icons/order mismatch.");
-        results.Add("isolatedPassportRegistration=6; all icons and names match fixed hat order");
-        Object.Destroy(passportTest);
-        Object.Destroy(test);
+        var allOptions = typeof(Customization).GetFields(BindingFlags.Public | BindingFlags.Instance)
+            .Where(field => field.FieldType == typeof(CustomizationOption[]))
+            .SelectMany(field => (CustomizationOption[])field.GetValue(customization));
+        foreach (var category in originalCatalog!)
+            foreach (var item in category.Value)
+                if (!allOptions.Any(option => option.name == item.name))
+                    throw new InvalidOperationException("Existing passport cosmetic was lost: " + item.name);
+        results.Add($"isolatedPassportRegistration={options.Length}; jojoOptions=6; existing custom entries preserved; all JOJO icons and names match fixed order");
+        }
+        finally
+        {
+            var testOptions = optionsBeforePassport == null ? Array.Empty<CustomizationOption>() :
+                Resources.FindObjectsOfTypeAll<CustomizationOption>()
+                    .Where(option => !optionsBeforePassport!.Contains(option.GetInstanceID())).ToArray();
+            var testMaterials = new HashSet<Material>();
+            // Inspect sharedMaterials, not materials: this must not instantiate another copy.
+            foreach (Renderer renderer in test.GetComponentsInChildren<Renderer>(true))
+                foreach (Material material in renderer.sharedMaterials)
+                    if (material && !originalMaterials.Contains(material.GetInstanceID())) testMaterials.Add(material);
+            foreach (CustomizationOption option in testOptions)
+                foreach (FieldInfo field in typeof(CustomizationOption).GetFields(BindingFlags.Public | BindingFlags.Instance))
+                    if (field.FieldType == typeof(Material) && field.GetValue(option) is Material material &&
+                        material && !originalMaterials.Contains(material.GetInstanceID())) testMaterials.Add(material);
+            // FitMaterialFallback creates a new Material in 1.1.10. Only reclaim it
+            // when this test initialized the cache; existing shared templates stay intact.
+            if (materialCache.GetValue(null) is Material temporaryTemplate && temporaryTemplate &&
+                !originalMaterials.Contains(temporaryTemplate.GetInstanceID())) testMaterials.Add(temporaryTemplate);
+            try
+            {
+                SetStatic(typeof(MoreCustomizationsPlugin), nameof(MoreCustomizationsPlugin.BaseHatCount), savedBaseHatCount);
+                SetStatic(typeof(MoreCustomizationsPlugin), nameof(MoreCustomizationsPlugin.OverrideHatCount), savedOverrideHatCount);
+                shaderCache.SetValue(null, savedShader);
+                materialCache.SetValue(null, savedMaterialTemplate);
+                results.Add("isolatedFrameworkGlobalsRestored=PASS");
+            }
+            finally
+            {
+                // Never destroy shared meshes, textures, shaders or original materials.
+                foreach (CustomizationOption option in testOptions) if (option) Object.Destroy(option);
+                foreach (Material material in testMaterials) if (material) Object.Destroy(material);
+                if (passportTest) Object.Destroy(passportTest);
+                Object.Destroy(test);
+            }
+        }
     }
 }
 
