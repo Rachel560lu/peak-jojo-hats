@@ -1,0 +1,101 @@
+{
+  "version": "0.4.2",
+  "hats": [
+    {
+      "id": "01_jotaro_cap",
+      "label": "Jotaro Cap",
+      "triangles": 11522,
+      "vertices": 6341,
+      "boundsMin": [
+        -1.50487,
+        -1.559617,
+        -0.833823
+      ],
+      "boundsMax": [
+        1.513491,
+        2.56,
+        2.2469
+      ]
+    },
+    {
+      "id": "02_josuke_pompadour",
+      "label": "Josuke Pompadour",
+      "triangles": 15984,
+      "vertices": 8065,
+      "boundsMin": [
+        -1.465994,
+        -1.465743,
+        -0.991004
+      ],
+      "boundsMax": [
+        1.465994,
+        1.750933,
+        2.022378
+      ]
+    },
+    {
+      "id": "03_giorno_rolls",
+      "label": "Giorno Rolls",
+      "triangles": 12212,
+      "vertices": 6203,
+      "boundsMin": [
+        -1.569856,
+        -1.663547,
+        -1.912722
+      ],
+      "boundsMax": [
+        1.569856,
+        1.364037,
+        2.071521
+      ]
+    },
+    {
+      "id": "04_jonathan_hair",
+      "label": "Jonathan Hair",
+      "triangles": 10612,
+      "vertices": 5381,
+      "boundsMin": [
+        -1.615321,
+        -1.671232,
+        -1.014095
+      ],
+      "boundsMax": [
+        1.614587,
+        1.604043,
+        2.843382
+      ]
+    },
+    {
+      "id": "05_jolyne_buns",
+      "label": "Jolyne Buns",
+      "triangles": 20860,
+      "vertices": 10939,
+      "boundsMin": [
+        -1.647049,
+        -1.707294,
+        -1.387272
+      ],
+      "boundsMax": [
+        1.647049,
+        1.315221,
+        1.960198
+      ]
+    },
+    {
+      "id": "06_joseph_hair",
+      "label": "Joseph Hair",
+      "triangles": 10066,
+      "vertices": 5217,
+      "boundsMin": [
+        -1.595996,
+        -1.659766,
+        -1.023114
+      ],
+      "boundsMax": [
+        1.722262,
+        1.543651,
+        2.246451
+      ]
+    }
+  ]
+}

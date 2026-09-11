@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# Frozen release hashes cover the exact exported asset bytes, including OBJ newlines.
+assets/** -text whitespace=cr-at-eol
+*.png -text
+*.gif -text
+*.zip -text
