@@ -5,13 +5,13 @@
 <h1 align="center">peak-jojo-hats</h1>
 
 <p align="center">
-  <strong>Six JoJos. One very bizarre climb.</strong><br>
-  Six iconic hats and hairstyles for your next PEAK adventure.
+  <strong>JOJO's Bizarre Climb</strong><br>
+  JOJO-inspired hats and hairstyles for PEAK.
 </p>
 
 <p align="center">
-  <strong>六位 JOJO，一场奇妙登山。</strong><br>
-  六款标志性帽子与发型，陪你攀登下一座 PEAK。
+  <strong>JOJO 的奇妙登山</strong><br>
+  给 PEAK 小人换个 JOJO 发型。
 </p>
 
 <p align="center">
@@ -29,13 +29,13 @@
   <a href="https://github.com/Rachel560lu/peak-jojo-hats/issues">Report an issue / 反馈</a>
 </p>
 
-为 **PEAK** 制作的非官方 JOJO 头饰模组。把六位主角的标志性发型与帽子带进游戏，以简洁配色、圆润体积和清晰轮廓融入小小侦察员的登山冒险。
+一个给 **PEAK** 小人换发型的 JOJO 同人模组。目前有乔纳森、乔瑟夫、承太郎、仗助、乔鲁诺和徐伦六款，选个喜欢的就可以出发了。发型和帽子都在护照的帽子页里选择。
 
-> **只增加头饰。** 展示图里的眼睛、表情、服装和手持道具并非本模组新增。模组包含六款静态帽子栏外观，不增加技能、身体替换或头发物理。
+> **只包含帽子和头发。** 截图里的眼睛、表情、衣服和道具不包含在模组里。它只改变头部外观，不增加技能或替换身体，头发也不会随动作摆动。
 
 ## 实机展示
 
-以下均为游戏截图，点击图片可查看原尺寸。
+戴上之后是这个样子。下面都是实机拍立得，点开可以看大图。
 
 <table>
 <tr><th>乔纳森·乔斯达</th><th>乔瑟夫·乔斯达</th><th>空条承太郎</th></tr>
@@ -55,9 +55,9 @@
 ## 包含内容
 
 - 六款头饰：承太郎帽、仗助牛排头、乔鲁诺三卷、乔纳森蓝发、徐伦双丸子、乔瑟夫棕发。
-- 连续发面、贴头发根与分区平滑法线，保留适合 PEAK 的简化风格。
-- 可运行的 JSON 网格与可编辑 OBJ 模型。**游玩不需要安装 Blender 或 Unity Editor。**
-- 通过 BepInEx 和 More Customizations 加载，在护照的帽子页选择。
+- 圆圆的造型、简单的配色，尽量贴近 PEAK 小人的画风。
+- 装好 BepInEx 和 More Customizations 后，在护照的帽子页选择喜欢的款式。
+- 想自己改模型的话，仓库里也有模型文件。只是游玩不需要安装 Blender 或 Unity Editor。
 
 ## 安装
 
@@ -67,15 +67,15 @@
 4. 使用只有 JOJO、没有 `.pcab` 的配置时，先关闭游戏，按[详细安装说明](docs/INSTALL.md)运行随包附带的兼容脚本。它会备份并修改**本地** More Customizations DLL，再将自带样例包移出加载目录。
 5. 从模组管理器启动游戏，进入护照的帽子页，翻到六款 JOJO 图标。
 
-**不能只删除 `built-in.pcab`。** 未修改的 More Customizations 1.1.10 会拒绝空资源包列表；零资源包配置需要先完成兼容步骤。
+**移除 `built-in.pcab` 前，记得先运行兼容脚本。** 如果只删文件，More Customizations 1.1.10 会因为找不到资源包而报错。
 
 ## 兼容性与注意事项
 
-- 本版会将**自定义外观目录**替换为六款 JOJO 头饰，其他自定义帽子、眼睛和配件不会显示；**原版外观仍可使用**。请勿直接装入混有其他外观包的常用配置。
+- 建议给它单独建一个配置：这一版只会显示六款 JOJO 自定义头饰，其他自定义帽子、眼睛和配件会被隐藏，**原版外观不受影响**。不要直接装进混有其他外观包的常用配置。
 - 联机玩家应安装一致的外观包和版本。本模组不会在玩家间传输模型文件，尚未完成双客户端联机验证。
 - 卸载或切换回原版配置前，先换回一顶原版帽子。
 - 依赖更新可能恢复样例包或改变兼容性。随包修复只在 More Customizations 1.1.10 上测试过。
-- 所有头饰都是静态模型，尚未穷尽验证每套服装、第一人称镜头以及攀爬／布娃娃动作中的穿模情况。
+- 头饰都是静态的。目前还没检查完所有衣服、第一人称视角和攀爬／摔倒姿势，可能会有穿模；遇到问题欢迎带截图反馈。
 
 ## 开发与源码
 
@@ -87,6 +87,6 @@
 
 顶部横幅为宣传插画；下方六张展示图均为真实游戏截图。
 
-基于 [BepInEx](https://github.com/BepInEx/BepInEx) 和 [More Customizations](https://github.com/Creta5164/peak-more-customizations)。头部挂载参考了其[帽子制作指南](https://github.com/Creta5164/peak-more-customizations/blob/main/docs/hat.md)。
+感谢 [BepInEx](https://github.com/BepInEx/BepInEx) 和 [More Customizations](https://github.com/Creta5164/peak-more-customizations) 提供模组支持，也参考了 More Customizations 的[帽子制作指南](https://github.com/Creta5164/peak-more-customizations/blob/main/docs/hat.md)。
 
 这是非官方同人项目，与 PEAK 或《JOJO 的奇妙冒险》的创作者及权利方没有隶属或背书关系。模组网格为本项目制作；截图包含游戏及其原有外观。仓库目前未附加明确的再使用许可，如需复用请先联系维护者。

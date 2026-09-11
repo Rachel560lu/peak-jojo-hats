@@ -5,13 +5,13 @@
 <h1 align="center">peak-jojo-hats</h1>
 
 <p align="center">
-  <strong>Six JoJos. One very bizarre climb.</strong><br>
-  Six iconic hats and hairstyles for your next PEAK adventure.
+  <strong>JOJO's Bizarre Climb</strong><br>
+  JOJO-inspired hats and hairstyles for PEAK.
 </p>
 
 <p align="center">
-  <strong>六位 JOJO，一场奇妙登山。</strong><br>
-  六款标志性帽子与发型，陪你攀登下一座 PEAK。
+  <strong>JOJO 的奇妙登山</strong><br>
+  给 PEAK 小人换个 JOJO 发型。
 </p>
 
 <p align="center">
@@ -29,13 +29,13 @@
   <a href="https://github.com/Rachel560lu/peak-jojo-hats/issues">Report an issue / 反馈</a>
 </p>
 
-A fan-made, hat-only cosmetic mod for **PEAK**, bringing six JOJO-inspired hairstyles and a cap to your scout. Rounded, stylized meshes, a shared color palette, and recognizable silhouettes made for a bizarre climb with friends.
+A small JOJO fan mod for **PEAK**. Pick from six looks inspired by Jonathan, Joseph, Jotaro, Josuke, Giorno and Jolyne, then head out for a climb. They're all worn as hats, including the hairstyles.
 
-> **Heads only.** The eyes, expressions, outfits and props in these gameplay screenshots are not added by this mod. It supplies six static head-slot cosmetics—no abilities, body replacements or hair physics.
+> **Just hats and hair.** The eyes, expressions, outfits and props in the screenshots aren't included. This mod only changes your headwear—no extra abilities, body replacements or moving hair.
 
 ## In-game gallery
 
-These are actual gameplay screenshots. Click any image to see the original full-size picture.
+Here's how they look in-game. Click a photo for a closer look.
 
 <table>
 <tr><th>Jonathan Joestar</th><th>Joseph Joestar</th><th>Jotaro Kujo</th></tr>
@@ -55,9 +55,9 @@ These are actual gameplay screenshots. Click any image to see the original full-
 ## What's included
 
 - Six selectable hats: Jotaro Cap, Josuke Pompadour, Giorno Rolls, Jonathan Hair, Jolyne Buns and Joseph Hair.
-- Continuous hair volumes, fitted roots and authored smooth normals, with a deliberately simple PEAK-friendly finish.
-- Runtime meshes and editable OBJ models. No Unity Editor or Blender is needed to **play** the mod.
-- BepInEx + More Customizations integration; the cosmetics appear in the passport's Hat tab.
+- Rounded shapes and simple colors to suit PEAK's little scouts.
+- Pick your favorite in the passport's Hat tab, with BepInEx and More Customizations installed.
+- Want to tinker? Model files are included. You don't need Blender or Unity Editor just to play.
 
 ## Install
 
@@ -67,7 +67,7 @@ These are actual gameplay screenshots. Click any image to see the original full-
 4. For the JOJO-only, zero-`.pcab` setup, close PEAK and run the included compatibility installer as explained in [the installation guide](docs/INSTALL.md). It backs up and patches the **local** More Customizations DLL and moves its sample bundle out of the loading path.
 5. Launch modded PEAK, open the passport's Hat tab, and page to the six JOJO icons.
 
-**Do not just delete `built-in.pcab`.** Unmodified More Customizations 1.1.10 rejects an empty bundle list; the compatibility step is required for this zero-bundle setup.
+**Please run the compatibility step before removing `built-in.pcab`.** Without the patch, More Customizations 1.1.10 reports an error when no bundles are present.
 
 ### Compatibility notes
 
@@ -87,6 +87,6 @@ See [Build and model development](docs/BUILD.md), [validation scope](docs/VALIDA
 
 The header is a promotional illustration; the six gallery images are actual gameplay screenshots.
 
-Built on [BepInEx](https://github.com/BepInEx/BepInEx) and [More Customizations](https://github.com/Creta5164/peak-more-customizations). The [More Customizations hat guide](https://github.com/Creta5164/peak-more-customizations/blob/main/docs/hat.md) informed head-slot integration.
+Thanks to [BepInEx](https://github.com/BepInEx/BepInEx) and [More Customizations](https://github.com/Creta5164/peak-more-customizations) for making custom cosmetics possible, and to the [hat-making guide](https://github.com/Creta5164/peak-more-customizations/blob/main/docs/hat.md) for the setup reference.
 
 This is an unofficial fan project, not affiliated with or endorsed by the creators or rights holders of PEAK or JoJo's Bizarre Adventure. The mod meshes were authored for this project; screenshots contain the game and its existing cosmetics. No explicit reuse license is included yet—please contact the maintainer before reusing project material.
