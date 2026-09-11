@@ -1,10 +1,33 @@
-<p align="center"><img src="icon.png" width="112" alt="JOJO Scout Hats icon"></p>
+<p align="center">
+  <img src="docs/banner/peak-jojo-hats-header-v1.png" width="100%" alt="Six PEAK-style JOJO scouts surrounding the peak-jojo-hats title / 六位 PEAK 版 JOJO 围绕模组标题">
+</p>
 
-<h1 align="center">PEAK × JOJO — Scout Hats</h1>
+<h1 align="center">peak-jojo-hats</h1>
 
-<p align="center">Six JoJos. One very bizarre climb.</p>
+<p align="center">
+  <strong>Six JoJos. One very bizarre climb.</strong><br>
+  Six iconic hats and hairstyles for your next PEAK adventure.
+</p>
 
-<p align="center"><a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest">Download v0.4.2</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="docs/INSTALL.md">Installation</a> · <a href="https://github.com/Rachel560lu/peak-jojo-hats/issues">Report an issue</a></p>
+<p align="center">
+  <strong>六位 JOJO，一场奇妙登山。</strong><br>
+  六款标志性帽子与发型，陪你攀登下一座 PEAK。
+</p>
+
+<p align="center">
+  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest"><img src="https://img.shields.io/badge/Download-GitHub_Releases-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on GitHub Releases / 在 GitHub 下载"></a>
+  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/tag/v0.4.2"><img src="https://img.shields.io/badge/Version-v0.4.2-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.4.2"></a>
+  <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/BepInEx-5-405c68?style=for-the-badge&amp;labelColor=555555" alt="Requires BepInEx 5"></a>
+  <img src="https://img.shields.io/badge/Hats-6-7560a8?style=for-the-badge&amp;labelColor=555555" alt="Six head cosmetics / 六款头饰">
+</p>
+
+<p align="center">
+  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest">Download / 下载</a> ·
+  <a href="README.zh-CN.md">简体中文</a> ·
+  <a href="README.md">English</a> ·
+  <a href="docs/INSTALL.md">Install / 安装</a> ·
+  <a href="https://github.com/Rachel560lu/peak-jojo-hats/issues">Report an issue / 反馈</a>
+</p>
 
 A fan-made, hat-only cosmetic mod for **PEAK**, bringing six JOJO-inspired hairstyles and a cap to your scout. Rounded, stylized meshes, a shared color palette, and recognizable silhouettes made for a bizarre climb with friends.
 
@@ -61,6 +84,8 @@ Current release: **0.4.2**. The repository includes the C# loader, procedural mo
 See [Build and model development](docs/BUILD.md), [validation scope](docs/VALIDATION.md) and [changelog](CHANGELOG.md). Game assemblies and third-party mod DLLs are **not** distributed here; a local PEAK installation is needed to compile the loader.
 
 ## Credits and project status
+
+The header is a promotional illustration; the six gallery images are actual gameplay screenshots.
 
 Built on [BepInEx](https://github.com/BepInEx/BepInEx) and [More Customizations](https://github.com/Creta5164/peak-more-customizations). The [More Customizations hat guide](https://github.com/Creta5164/peak-more-customizations/blob/main/docs/hat.md) informed head-slot integration.
 

@@ -1,10 +1,33 @@
-<p align="center"><img src="icon.png" width="112" alt="JOJO Scout Hats 图标"></p>
+<p align="center">
+  <img src="docs/banner/peak-jojo-hats-header-v1.png" width="100%" alt="Six PEAK-style JOJO scouts surrounding the peak-jojo-hats title / 六位 PEAK 版 JOJO 围绕模组标题">
+</p>
 
-<h1 align="center">PEAK × JOJO — Scout Hats</h1>
+<h1 align="center">peak-jojo-hats</h1>
 
-<p align="center">六位 JOJO，一场奇妙登山。</p>
+<p align="center">
+  <strong>Six JoJos. One very bizarre climb.</strong><br>
+  Six iconic hats and hairstyles for your next PEAK adventure.
+</p>
 
-<p align="center"><a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest">下载 v0.4.2</a> · <a href="README.md">English</a> · <a href="docs/INSTALL.md">安装说明</a> · <a href="https://github.com/Rachel560lu/peak-jojo-hats/issues">反馈问题</a></p>
+<p align="center">
+  <strong>六位 JOJO，一场奇妙登山。</strong><br>
+  六款标志性帽子与发型，陪你攀登下一座 PEAK。
+</p>
+
+<p align="center">
+  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest"><img src="https://img.shields.io/badge/Download-GitHub_Releases-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on GitHub Releases / 在 GitHub 下载"></a>
+  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/tag/v0.4.2"><img src="https://img.shields.io/badge/Version-v0.4.2-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.4.2"></a>
+  <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/BepInEx-5-405c68?style=for-the-badge&amp;labelColor=555555" alt="Requires BepInEx 5"></a>
+  <img src="https://img.shields.io/badge/Hats-6-7560a8?style=for-the-badge&amp;labelColor=555555" alt="Six head cosmetics / 六款头饰">
+</p>
+
+<p align="center">
+  <a href="https://github.com/Rachel560lu/peak-jojo-hats/releases/latest">Download / 下载</a> ·
+  <a href="README.zh-CN.md">简体中文</a> ·
+  <a href="README.md">English</a> ·
+  <a href="docs/INSTALL.md">Install / 安装</a> ·
+  <a href="https://github.com/Rachel560lu/peak-jojo-hats/issues">Report an issue / 反馈</a>
+</p>
 
 为 **PEAK** 制作的非官方 JOJO 头饰模组。把六位主角的标志性发型与帽子带进游戏，以简洁配色、圆润体积和清晰轮廓融入小小侦察员的登山冒险。
 
@@ -61,6 +84,8 @@
 参阅[构建与模型开发](docs/BUILD.md)、[验证范围](docs/VALIDATION.md)和[更新记录](CHANGELOG.md)。仓库不分发游戏程序集或其他模组 DLL；编译加载器需要你本地合法安装的 PEAK。
 
 ## 致谢与声明
+
+顶部横幅为宣传插画；下方六张展示图均为真实游戏截图。
 
 基于 [BepInEx](https://github.com/BepInEx/BepInEx) 和 [More Customizations](https://github.com/Creta5164/peak-more-customizations)。头部挂载参考了其[帽子制作指南](https://github.com/Creta5164/peak-more-customizations/blob/main/docs/hat.md)。
 
