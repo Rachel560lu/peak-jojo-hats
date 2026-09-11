@@ -6,7 +6,7 @@
 
 JOJO-inspired hats and hairstyles for PEAK. 给 PEAK 小人换个 JOJO 发型。
 
-Six head cosmetics inspired by Jotaro, Jolyne, Giorno, Josuke, Joseph and Jonathan, alongside your other cosmetics. **Version 0.5.1** adds an outfit concept preview to this page; runtime logic is unchanged from v0.5.0 and the six models are unchanged from v0.4.2.
+Six head cosmetics inspired by Jotaro, Jolyne, Giorno, Josuke, Joseph and Jonathan, alongside your other cosmetics. **Version 0.5.2** updates the package cover; runtime logic is unchanged from v0.5.0 and the six models are unchanged from v0.4.2. The outfit concept preview remains below.
 
 [In-game gallery and source](https://github.com/Rachel560lu/peak-jojo-hats) · [中文介绍](https://github.com/Rachel560lu/peak-jojo-hats/blob/main/README.zh-CN.md) · [Installation and troubleshooting](https://github.com/Rachel560lu/peak-jojo-hats/blob/main/docs/INSTALL.md) · [Report an issue](https://github.com/Rachel560lu/peak-jojo-hats/issues)
 

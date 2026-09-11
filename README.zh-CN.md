@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/"><img src="https://img.shields.io/badge/Download-Thunderstore-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on Thunderstore / 在 Thunderstore 下载"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.1-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.1"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.2-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.2"></a>
   <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/BepInEx-5-405c68?style=for-the-badge&amp;labelColor=555555" alt="Requires BepInEx 5"></a>
   <img src="https://img.shields.io/badge/Hats-6-7560a8?style=for-the-badge&amp;labelColor=555555" alt="Six head cosmetics / 六款头饰">
 </p>
@@ -88,7 +88,7 @@
 
 ## 开发与源码
 
-当前版本：**0.5.1**。本次说明更新加入服装概念预告；加载逻辑沿用 v0.5.0，六款模型沿用 v0.4.2。仓库包含 C# 加载器、程序化建模源码、JSON／OBJ 模型、共享色板以及六张原尺寸展示图。
+当前版本：**0.5.2**。本次更新替换了模组封面与项目横幅；加载逻辑沿用 v0.5.0，六款模型沿用 v0.4.2。仓库包含 C# 加载器、程序化建模源码、JSON／OBJ 模型、共享色板以及六张原尺寸展示图。
 
 参阅[构建与模型开发](docs/BUILD.md)、[验证范围](docs/VALIDATION.md)和[更新记录](CHANGELOG.md)。仓库不分发游戏程序集或其他模组 DLL；编译加载器需要你本地合法安装的 PEAK。
 

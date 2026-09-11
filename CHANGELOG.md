@@ -1,3 +1,10 @@
+# 0.5.2
+
+- Update the package cover with the revised, borderless JOJO scout illustration.
+- No changes to models, cosmetic IDs, dependencies or runtime logic.
+
+中文：更新为无边框新版封面，六款头饰与加载逻辑不变。
+
 # 0.5.1
 
 - Add a bilingual coming-soon section and concept illustration for planned JOJO outfits.

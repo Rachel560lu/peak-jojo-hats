@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/"><img src="https://img.shields.io/badge/Download-Thunderstore-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on Thunderstore / 在 Thunderstore 下载"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.1-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.1"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.2-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.2"></a>
   <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/BepInEx-5-405c68?style=for-the-badge&amp;labelColor=555555" alt="Requires BepInEx 5"></a>
   <img src="https://img.shields.io/badge/Hats-6-7560a8?style=for-the-badge&amp;labelColor=555555" alt="Six head cosmetics / 六款头饰">
 </p>
@@ -88,7 +88,7 @@ Matching JOJO outfits for the six scouts are planned. Here's a first look at the
 
 ## Source and development
 
-Current version: **0.5.1**. This documentation update adds the outfit concept preview; runtime logic is unchanged from v0.5.0 and the six models are unchanged from v0.4.2. The repository includes the C# loader, procedural model sources, exported JSON/OBJ meshes, shared palette and the six original-size showcase images.
+Current version: **0.5.2**. This update refreshes the package cover and project header; runtime logic is unchanged from v0.5.0 and the six models are unchanged from v0.4.2. The repository includes the C# loader, procedural model sources, exported JSON/OBJ meshes, shared palette and the six original-size showcase images.
 
 See [Build and model development](docs/BUILD.md), [validation scope](docs/VALIDATION.md) and [changelog](CHANGELOG.md). Game assemblies and third-party mod DLLs are **not** distributed here; a local PEAK installation is needed to compile the loader.
 
