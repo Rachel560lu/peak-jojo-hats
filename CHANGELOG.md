@@ -1,3 +1,11 @@
+# 0.5.1
+
+- Add a bilingual coming-soon section and concept illustration for planned JOJO outfits.
+- Clearly distinguish the concept from the in-game gallery: outfits are not included, and no release date is set.
+- No changes to hat models, cosmetic IDs, dependencies or runtime logic; only release version metadata changes in the loader.
+
+中文：新增 JOJO 服装预告与设计示意图，明确服装尚未包含、暂无发布日期。六款头饰与加载逻辑不变。
+
 # 0.5.0
 
 - Add six JOJO hats alongside the existing cosmetic catalog instead of replacing it; keep other custom hats, eyes, faces and accessories.

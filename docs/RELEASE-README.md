@@ -6,7 +6,7 @@
 
 JOJO-inspired hats and hairstyles for PEAK. 给 PEAK 小人换个 JOJO 发型。
 
-Six head cosmetics: Jotaro Cap, Josuke Pompadour, Giorno Rolls, Jonathan Hair, Jolyne Buns and Joseph Hair. **Version 0.5.0** adds them alongside your other cosmetics. The six models are unchanged from v0.4.2.
+Six head cosmetics inspired by Jotaro, Jolyne, Giorno, Josuke, Joseph and Jonathan, alongside your other cosmetics. **Version 0.5.1** adds an outfit concept preview to this page; runtime logic is unchanged from v0.5.0 and the six models are unchanged from v0.4.2.
 
 [In-game gallery and source](https://github.com/Rachel560lu/peak-jojo-hats) · [中文介绍](https://github.com/Rachel560lu/peak-jojo-hats/blob/main/README.zh-CN.md) · [Installation and troubleshooting](https://github.com/Rachel560lu/peak-jojo-hats/blob/main/docs/INSTALL.md) · [Report an issue](https://github.com/Rachel560lu/peak-jojo-hats/issues)
 
@@ -71,6 +71,18 @@ Share the **same complete cosmetic profile** with everyone in the lobby: JOJO, d
 仅包含静态头饰，不包含展示图中的眼睛、衣服和道具。卸载前换回原版帽子并退出游戏，保留其他模组需要的依赖。正常安装的 v0.5.0 卸载后不需要修复框架；旧版修改过的配置需单独恢复。
 
 [六款实机展示 / In-game gallery](https://github.com/Rachel560lu/peak-jojo-hats#in-game-gallery) · [详细安装与排错 / Full guide](https://github.com/Rachel560lu/peak-jojo-hats/blob/main/docs/INSTALL.md)
+
+## Coming soon: JOJO outfits / 即将推出：JOJO 服装
+
+Matching JOJO outfits for the six scouts are planned. Here's a first look at the idea.
+
+计划给六位小人配上 JOJO 服装，先看看设计示意。
+
+![JOJO outfits concept illustration / JOJO 服装设计示意图](https://raw.githubusercontent.com/Rachel560lu/peak-jojo-hats/main/docs/coming-soon/jojo-outfits-concept.png)
+
+**Concept illustration, not an in-game screenshot.** These outfits are not included in the current hats mod. Final designs may change; no release date is set yet.
+
+**这是概念示意图，不是实机截图。** 服装尚未包含在当前头饰模组中，最终造型可能调整，暂未确定发布日期。
 
 ## Credits / 致谢
 

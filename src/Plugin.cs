@@ -18,7 +18,7 @@ namespace JojoHats;
 [BepInDependency("MoreCustomizations", "1.1.10")]
 public sealed class Plugin : BaseUnityPlugin
 {
-    internal const string Version = "0.5.0";
+    internal const string Version = "0.5.1";
     private const string Prefix = "jojo_mvp_";
     private static readonly string[] Ids = {
         "01_jotaro_cap", "02_josuke_pompadour", "03_giorno_rolls",

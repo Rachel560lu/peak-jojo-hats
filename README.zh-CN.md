@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/"><img src="https://img.shields.io/badge/Download-Thunderstore-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on Thunderstore / 在 Thunderstore 下载"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.0-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.0"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.1-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.1"></a>
   <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/BepInEx-5-405c68?style=for-the-badge&amp;labelColor=555555" alt="Requires BepInEx 5"></a>
   <img src="https://img.shields.io/badge/Hats-6-7560a8?style=for-the-badge&amp;labelColor=555555" alt="Six head cosmetics / 六款头饰">
 </p>
@@ -78,9 +78,17 @@
 - 适配目标是未修改的 More Customizations 1.1.10。其他框架或游戏版本可能需要兼容更新，具体见[验证范围](docs/VALIDATION.md)。
 - 头饰都是静态的。目前还没检查完所有衣服、第一人称视角和攀爬／摔倒姿势，可能会有穿模；遇到问题欢迎带截图反馈。
 
+## 即将推出：JOJO 服装
+
+计划给六位小人配上 JOJO 服装，先看看设计示意。
+
+![六位 PEAK 版 JOJO 的服装设计示意图](docs/coming-soon/jojo-outfits-concept.png)
+
+**这是概念示意图，不是实机截图。** 服装尚未包含在当前头饰模组中，最终造型可能调整，暂未确定发布日期。
+
 ## 开发与源码
 
-当前版本：**0.5.0**。六款模型沿用 v0.4.2，本次主要改进安装体验和与其他外观的共存。仓库包含 C# 加载器、程序化建模源码、JSON／OBJ 模型、共享色板以及六张原尺寸展示图。
+当前版本：**0.5.1**。本次说明更新加入服装概念预告；加载逻辑沿用 v0.5.0，六款模型沿用 v0.4.2。仓库包含 C# 加载器、程序化建模源码、JSON／OBJ 模型、共享色板以及六张原尺寸展示图。
 
 参阅[构建与模型开发](docs/BUILD.md)、[验证范围](docs/VALIDATION.md)和[更新记录](CHANGELOG.md)。仓库不分发游戏程序集或其他模组 DLL；编译加载器需要你本地合法安装的 PEAK。
 

@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="https://thunderstore.io/c/peak/p/Rachel560lu/JojoScoutHats/"><img src="https://img.shields.io/badge/Download-Thunderstore-a4d56e?style=for-the-badge&amp;labelColor=555555" alt="Download on Thunderstore / 在 Thunderstore 下载"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.0-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.0"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Version-v0.5.1-405c68?style=for-the-badge&amp;labelColor=555555" alt="Version 0.5.1"></a>
   <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/BepInEx-5-405c68?style=for-the-badge&amp;labelColor=555555" alt="Requires BepInEx 5"></a>
   <img src="https://img.shields.io/badge/Hats-6-7560a8?style=for-the-badge&amp;labelColor=555555" alt="Six head cosmetics / 六款头饰">
 </p>
@@ -78,9 +78,17 @@ No PowerShell, file deletion or framework patch is needed. Leave More Customizat
 - The supported framework target is unmodified More Customizations 1.1.10. Other framework or game versions may need a compatibility update; see [validation scope](docs/VALIDATION.md).
 - These are static hats. Clipping with every outfit, first-person camera and climbing/ragdoll pose has not been exhaustively tested.
 
+## Coming soon: JOJO outfits
+
+Matching JOJO outfits for the six scouts are planned. Here's a first look at the idea.
+
+![Concept illustration of six PEAK-style scouts in JOJO outfits](docs/coming-soon/jojo-outfits-concept.png)
+
+**Concept illustration, not an in-game screenshot.** These outfits are not included in the current hats mod. Final designs may change; no release date is set yet.
+
 ## Source and development
 
-Current version: **0.5.0**. The six models are unchanged from v0.4.2; this update focuses on installation and coexistence with other cosmetics. The repository includes the C# loader, procedural model sources, exported JSON/OBJ meshes, shared palette and the six original-size showcase images.
+Current version: **0.5.1**. This documentation update adds the outfit concept preview; runtime logic is unchanged from v0.5.0 and the six models are unchanged from v0.4.2. The repository includes the C# loader, procedural model sources, exported JSON/OBJ meshes, shared palette and the six original-size showcase images.
 
 See [Build and model development](docs/BUILD.md), [validation scope](docs/VALIDATION.md) and [changelog](CHANGELOG.md). Game assemblies and third-party mod DLLs are **not** distributed here; a local PEAK installation is needed to compile the loader.
 
